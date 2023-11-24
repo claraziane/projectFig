@@ -1,7 +1,8 @@
 function plotCorrel(dataX, dataY, xLabel, yLabel, Titles, corrType)
 
 % Declare colors for colors
-addpath(genpath('/Volumes/Seagate/project_rhythmicBrain/Toolbox/rgb')); %Toolbox draw figures
+addpath(genpath ...
+    ('/Volumes/Seagate/project_rhythmicBrain/Toolbox/rgb')); %Toolbox draw figures
 Colors = [rgb('DodgerBlue')];
 subNum = ceil(length(Titles)/2);
 
