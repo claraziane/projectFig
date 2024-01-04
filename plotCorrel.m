@@ -3,7 +3,7 @@ function plotCorrel(dataX, dataY, xLabel, yLabel, Titles, corrType)
 % Declare colors for colors
 addpath(genpath ...
     ('/Volumes/Seagate/project_rhythmicBrain/Toolbox/rgb')); %Toolbox draw figures
-Colors = [rgb('DodgerBlue')];
+Colors = [rgb('DarkOrange'); rgb('LightGray')];
 subNum = ceil(length(Titles)/2);
 
 fig = figure;
@@ -12,33 +12,25 @@ figX = gca;
 
 for iCondition = 1:size(dataX,2)
 
+    X = dataX(~isnan(dataX(:,iCondition)),iCondition);
+    Y = dataY(~isnan(dataY(:,iCondition)),iCondition);
+
     % Compute correlation
-    [rho, p] = corr(dataX(:,iCondition), dataY(:,iCondition), 'Type', corrType);
+    [rho, p] = corr(X, Y, 'Type', corrType);
+
+    % Linear regression (\ performs a least-squares regression)
+    regX = [ones(length(X),1) X];
+    regCoeff = regX \ Y; % Find intercept (1st line) and slope (2nd line)
+    regY     = regX * regCoeff; % Find predicted Y
 
     % Plot correlation
-    subplot(2,subNum,iCondition); scatter(dataX(:,iCondition), dataY(:,iCondition), 150, Colors, 'filled', 'MarkerFaceAlpha', 0.7,...
-        'DisplayName', ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))]);
-        xlabel(xLabel, 'FontSize', 20); ylabel(yLabel, 'FontSize', 20);
-        legend('FontSize', 16);
-        title(Titles{iCondition}, 'FontSize', 16);
+    subplot(2,subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
+    plot(X, regY, 'color', Colors(end,:), 'LineWidth', 2)
+    xlabel(xLabel, 'FontSize', 20); ylabel(yLabel, 'FontSize', 20);
+    title(Titles{iCondition}, ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);
 
-%         subplot(2,subNum,size(dataX,2)+1); scatter(dataX(:,iCondition), dataY(:,iCondition), 150, Colors(iCondition,:), 'filled', 'MarkerFaceAlpha', 0.7);
-%         xlabel(xLabel, 'FontSize', 20); ylabel(yLabel, 'FontSize', 20);
-%         title('All conditions', 'FontSize', 16);
-%         hold on;
+    clear X Y
 
 end
 
-% % Pool all conditions together
-% dataX = reshape(dataX, [size(dataX,1)*size(dataX,2) 1]);
-% dataY = reshape(dataY, [size(dataY,1)*size(dataY,2) 1]);
-% 
-% % Compute correlation
-% [rho, p] = corr(dataX, dataY, 'Type', corrType);
-% 
-% % Plot
-% subplot(2,2,iCondition+1); 
-%     legend(['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))],'Location','northeast','Orientation','horizontal')
-%     legend('FontSize', 16);
-% 
 end
