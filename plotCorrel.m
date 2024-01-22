@@ -11,6 +11,15 @@ sgtitle([yLabel ' as a Function of ' xLabel], 'FontSize', 20)
 figX = gca;
 
 for iCondition = 1:size(dataX,2)
+    for iElement = 1:size(dataX,1)
+        if isnan(dataX(iElement,iCondition))
+            dataY(iElement,iCondition) = nan;
+        end
+
+        if isnan(dataY(iElement,iCondition))
+            dataX(iElement,iCondition) = nan;
+        end
+    end
 
     X = dataX(~isnan(dataX(:,iCondition)),iCondition);
     Y = dataY(~isnan(dataY(:,iCondition)),iCondition);
