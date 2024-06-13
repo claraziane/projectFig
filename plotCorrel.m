@@ -7,7 +7,7 @@ Colors = [rgb('DarkOrange'); rgb('LightGray')];
 subNum = ceil(length(Titles)/2);
 
 fig = figure;
-sgtitle([yLabel ' as a Function of ' xLabel], 'FontSize', 20)
+% sgtitle([yLabel ' as a Function of ' xLabel], 'FontSize', 20)
 figX = gca;
 
 for iCondition = 1:size(dataX,2)
@@ -33,7 +33,7 @@ for iCondition = 1:size(dataX,2)
     regY     = regX * regCoeff; % Find predicted Y
 
     % Plot correlation
-    subplot(2,subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
+    subplot(length(Titles),subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
     plot(X, regY, 'color', Colors(end,:), 'LineWidth', 2)
     xlabel(xLabel, 'FontSize', 20); ylabel(yLabel, 'FontSize', 20);
     title(Titles{iCondition}, ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);

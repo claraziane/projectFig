@@ -1,7 +1,7 @@
 function fig_resultsScatter(data, xLabel, yLabel)
 
 % Define colors for plotting
-addpath('/Volumes/Seagate/project_rhythmicBrain/Toolbox/rgb'); %To draw figures
+addpath('/Users/claraziane/Documents/Académique/Informatique/MATLAB/rgb/'); %To draw figures
 
 for iLabel = 1:length(xLabel)
     if strcmpi(xLabel{iLabel}(1:6), 'uncued')
