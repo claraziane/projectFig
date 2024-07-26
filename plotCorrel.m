@@ -2,7 +2,7 @@ function plotCorrel(dataX, dataY, xLabel, yLabel, Titles, corrType)
 
 % Declare colors for colors
 addpath(genpath ...
-    ('/Volumes/Seagate/project_rhythmicBrain/Toolbox/rgb')); %Toolbox draw figures
+    ('/Users/claraziane/Documents/Académique/Informatique/MATLAB/rgb/')); %Toolbox draw figures
 Colors = [rgb('DarkOrange'); rgb('LightGray')];
 subNum = ceil(length(Titles)/2);
 
@@ -33,7 +33,8 @@ for iCondition = 1:size(dataX,2)
     regY     = regX * regCoeff; % Find predicted Y
 
     % Plot correlation
-    subplot(length(Titles),subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
+    %     subplot(length(Titles),subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
+    subplot(subNum,subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
     plot(X, regY, 'color', Colors(end,:), 'LineWidth', 2)
     xlabel(xLabel, 'FontSize', 20); ylabel(yLabel, 'FontSize', 20);
     title(Titles{iCondition}, ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);

@@ -24,7 +24,7 @@ xTicks(:,1) = randi([1, 20], size(data,1), 1);
 xTicks(:,1) = 0.9 + (xTicks(:,1)/100);
 
 for iCond = 2:size(data,2)
-    if ismember(iCond, [3 5 7 9])
+    if ismember(iCond, [3:2:100])
         xTicks(:,iCond) = xTicks(:,iCond-1)+1.5;
     else
         xTicks(:,iCond) = xTicks(:,iCond-1)+0.5;
