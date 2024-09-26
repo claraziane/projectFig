@@ -40,7 +40,6 @@ if length(Comparison) == 2
 elseif length(Comparison) == 1
 
     for iCond = 2:size(data,2)
-
         xTicks(:,iCond) = xTicks(:,iCond-1)+1;
 
     end
@@ -56,11 +55,10 @@ ax = gca;
 set(ax, 'xlim',  [0 size(data,2)+1])
 if length(Comparison) == 2
     set(ax, 'xtick', [1.25:2:size(data,2)])
-    set(ax, 'xticklabel', xLabel);
 elseif length(Comparison) == 1
-    set(ax, 'xtick', [.9:1:size(data,2)])
-    set(ax, 'xticklabel', xLabel);
+    set(ax, 'xtick', [1.25:1:size(data,2)])
 end
+set(ax, 'xticklabel', xLabel);
 set(ax, 'FontWeight', 'bold', 'FontSize', 20);
 ylabel(yLabel)
 % title(figTitle);

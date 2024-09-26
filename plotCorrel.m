@@ -34,9 +34,15 @@ for iCondition = 1:size(dataX,2)
 
     % Plot correlation
     %     subplot(length(Titles),subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
-    subplot(subNum,subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
+    subplot(2,subNum,iCondition); scatter(X, Y, 150, Colors(1,:), 'filled', 'MarkerFaceAlpha', 0.7); hold on;
     plot(X, regY, 'color', Colors(end,:), 'LineWidth', 2)
-    xlabel(xLabel, 'FontSize', 20); ylabel(yLabel, 'FontSize', 20);
+    if iCondition >= subNum+1
+        xlabel(xLabel, 'FontSize', 20); 
+    end
+
+    if ismember(iCondition, [1 (subNum+1)])
+        ylabel(yLabel, 'FontSize', 20);
+    end
     title(Titles{iCondition}, ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);
 
     clear X Y
