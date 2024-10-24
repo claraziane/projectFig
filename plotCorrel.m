@@ -43,7 +43,11 @@ for iCondition = 1:size(dataX,2)
     if ismember(iCondition, [1 (subNum+1)])
         ylabel(yLabel, 'FontSize', 20);
     end
-    title(Titles{iCondition}, ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);
+    if strcmpi(corrType, 'Spearman')
+        title(Titles{iCondition}, ['\rho = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);
+    elseif strcmpi(corrType, 'Pearson')
+        title(Titles{iCondition}, ['r = ' num2str(round(rho,2)) '; p = ' num2str(round(p,2))], 'FontSize', 16);
+    end
 
     clear X Y
 
